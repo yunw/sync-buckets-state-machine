@@ -62,19 +62,7 @@ States:
         ResultPath: '$.regionsAreSame'
         OutputPath: '$'
         TimeoutSeconds: 15
-        Next: ConfirmInputValid
-    ConfirmInputValid:
-        Type: Choice
-        Choices:
-            -
-                Variable: "$.regionsAreSame"
-                BooleanEquals: true
-                Next: ProcessBuckets
-        Default: BucketRegionsNotEqualFailure
-    BucketRegionsNotEqualFailure:
-        Type: Fail
-        Error: BucketRegionsNotEqualError
-        Cause: "The source and destination buckets have different regions. This is currently not supported."
+        Next: ProcessBuckets
     ProcessBuckets:
         Type: Parallel
         Branches:
